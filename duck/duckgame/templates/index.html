@@ -2,19 +2,28 @@
 <html>
 <head>
 <title>The Rubber Duckies!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Tajawal:wght@300&display=swap" rel="stylesheet">
 <style>
     h1
     {
         display:flex;
         flex-direction:row;
         justify-content:center;
+        color:white;
+        font-family: 'Righteous', cursive;
+        font-size:70px;
     }
     .choose-games
     {
         display:flex;
         flex-direction:column;
-        justify-content:center;
+        justify-content:space-around;
         align-items:center;
+        color:white;
+        font-family: 'Tajawal', sans-serif;
+        font-size:32px;
     }
     .choose-games a 
     {
@@ -22,8 +31,26 @@
         flex-direction:column;
         justify-content:center;
         text-align:center;
-        padding:20px;
+        padding:30px;
         background-color:pink;
+        text-decoration:none;
+        border-radius:20px;
+        color:#355070;
+        font-family: 'Tajawal', sans-serif;
+    }
+    html
+    {
+        width:100%;
+        height:100%;
+        background-image: linear-gradient(180deg, #355070, #E56B6F);
+        background-repeat:no-repeat;
+    }
+    body
+    {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
     }
     
 </style>
@@ -34,13 +61,12 @@
     <!--a link that looks like a button, linking to the minigames.html page-->
     <div class="choose-games">
         <div id="story-mode-describe">
-            <h4>Click to play them all in story mode!</h4>
+            <h4>Click to play them ALL in story mode!</h4>
             <!--another linking to the start of the game-->
             <a href="/start">Start</a>
         </div>
         
-        <h3>OR</h3>
-
+        <div><h3>OR</h3></div>
 
         <div id="mini-games-describe">
             <h4>Click to choose a mini-game!</h4>
