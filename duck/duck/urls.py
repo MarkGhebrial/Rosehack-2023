@@ -20,5 +20,6 @@ from duckgame import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index)
+    path('', views.index),
+    path('mini', views.mini)
 ]
