@@ -2,23 +2,34 @@
 <html>
 <head>
 <title>The Rubber Duckies!</title>
+<style>
+    .choose-games
+    {
+        display:flex;
+        flex-direction:column;
+        justify-content:space-around;
+        align-items:center;
+
+    }
+</style>
 </head>
 <body>
     <h1>The Rubber Duckies!</h1>
 
     <!--a link that looks like a button, linking to the minigames.html page-->
     <div class="choose-games">
-        <div id="mini-games-describe">
-            <h4>Click to choose a mini-game!</h4>
-            <a href="">Mini Games</a>
-        </div>
-
-        <h3>OR</h3>
-
         <div id="story-mode-describe">
             <h4>Click to play them all in story mode!</h4>
             <!--another linking to the start of the game-->
-            <a href="">Start</a>
+            <a href="/start">Start</a>
+        </div>
+        
+        <h3>OR</h3>
+
+
+        <div id="mini-games-describe">
+            <h4>Click to choose a mini-game!</h4>
+            <a href="/mini">Mini Games</a>
         </div>
     </div>
 </body>

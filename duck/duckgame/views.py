@@ -24,3 +24,8 @@ def update_leaderboard(request):
     # request.user
 
     return HttpResponse('Testing, testing, 1, 2, 3')
+def mini(request):
+    return render(request, "minigames.html")
+
+def start(request):
+    return render(request, "start.html")
