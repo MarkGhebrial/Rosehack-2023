@@ -1,10 +1,38 @@
-from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseBadRequest
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, Http404, HttpResponseBadRequest, HttpResponseForbidden
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from duckgame.models import SnakeLeaderboard, ClickerLeaderboard, GalagaLeaderboard
 import json
 
 def serve_file(request, file):
     return render(request, file)
+
+def auth(request):
+    if request.method == "POST":
+        data = request.POST
+        user = authenticate(request, username=data["name"], password=data["password"])
+        if user is not None:
+            login(request, user)
+            return redirect("/")
+        else:
+            return HttpResponse("Invalid login. Are the username and password correct?")
+    else:
+        return HttpResponseBadRequest()
+
+def new_user(request):
+    if request.method == "POST":
+        data = request.POST
+        user = User.objects.create_user(username=data["name"], password=data['password'])
+        user.save()
+
+        return auth(request)
+    else:
+        return HttpResponseBadRequest()
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
 
 def leaderboard(request, game):
     '''
@@ -39,16 +67,30 @@ def leaderboard(request, game):
     elif request.method == "POST":
         data = request.POST
 
-        if data['user'] and data['score']:
-            raise HttpResponseBadRequest()
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+
+        if not 'score' in data.keys():
+            return HttpResponseBadRequest()
+
+        # Make sure the score field is an integer
+        try:
+            int(data['score'])
+        except:
+            return HttpResponseBadRequest()
+
+        for entry in table.objects.all():
+            if entry.user == request.user.username: # Find the user's leaderboard entry
+                if int(data['score']) <= entry.score:
+                    return HttpResponse("No personal best")
 
         # Write to the database
         d = table()
-        d.user = data['user']
+        d.user = request.user.username
         d.score = data['score']
         d.save()
 
-        return HttpResponse()
+        return HttpResponse("New personal best!")
 
     else:
         raise HttpResponseBadRequest()

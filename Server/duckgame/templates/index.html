@@ -77,7 +77,11 @@
 </head>
 <body>
     <div class ="login-button">
-        <a href="/login" id="login-button">Login to join the Leaderboard!</a>
+        {% if user.is_authenticated %}
+            <a href="/api/logout" id="login-button">Log out (logged in as {{ user.username }})</a>
+        {% else %}
+            <a href="/login" id="login-button">Login to join the Leaderboard!</a>
+        {% endif %}
     </div>
     <h1>The Rubber Duckies!</h1>
 
