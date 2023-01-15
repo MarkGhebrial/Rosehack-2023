@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PurchaseEgg : MonoBehaviour
+public class PurchaseClones : MonoBehaviour
 {
     [SerializeField]
-    public int eggsPurchased;
+    public int clonesPurchased;
     [SerializeField]
 
     private Text text;
 
     public void purchasedCount()
     {
-        eggsPurchased++;
-        text.text = eggsPurchased.ToString();
+        clonesPurchased++;
+        text.text = clonesPurchased.ToString();
     }
 }

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DuckClicker : MonoBehaviour
+public class PurchaseCoops : MonoBehaviour
 {
     [SerializeField]
-    public int DuckCount;
+    public int coopsPurchased;
     [SerializeField]
+
     private Text text;
 
-    public void MakeADuck()
+    public void purchasedCount()
     {
-        DuckCount += 5;
-        text.text = DuckCount.ToString();
+        coopsPurchased++;
+        text.text = coopsPurchased.ToString();
     }
 }
