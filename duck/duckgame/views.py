@@ -52,3 +52,6 @@ def game2(request):
 
 def game3(request):
     return render(request, "game3.html")
+
+def login(request):
+    return render(request, "registration\login.html")

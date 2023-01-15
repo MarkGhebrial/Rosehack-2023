@@ -26,6 +26,7 @@ urlpatterns = [
     path('game1', views.game1),
     path('game2', views.game2),
     path('game3', views.game3),
+    path('login', views.login),
 
     # API patterns
     path('api/login', views.auth),
