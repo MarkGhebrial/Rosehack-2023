@@ -25,4 +25,7 @@ urlpatterns = [
     path('login', views.auth),
     path('mini', views.mini),
     path('start', views.start),
+    path('game1', views.game1),
+    path('game2', views.game2),
+    path('game3', views.game3),
 ]
