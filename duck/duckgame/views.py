@@ -43,3 +43,12 @@ def mini(request):
 
 def start(request):
     return render(request, "start.html")
+
+def game1(request):
+    return render(request, "game1.html")
+
+def game2(request):
+    return render(request, "game2.html")
+
+def game3(request):
+    return render(request, "game3.html")

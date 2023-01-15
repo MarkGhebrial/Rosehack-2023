@@ -1,23 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>The Rubber Duckies!</title>
-</head>
-<body>
-    <h1>The Rubber Duckies!</h1>
 
-    <!--a link that looks like a button, linking to the minigames.html page-->
-    <div class="pickgameof3">
-        <div>
-            <div = "button">
-                
-            </div>
-            <div>
-            </div>
-            <div>
-            </div>
-        </div>
+<head>
+    <title>Minigames</title>
+
+    <style>
+        body, html {
+            background-color: black;
+            height: 100%;
+            width:100%;
+            margin:0;
+            padding:0;
+            overflow: hidden;
+        }
+          
+        #explodes {
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+            margin-top:150px;
+            align-items:center;
+            gap: 200px;
+        }
+          
+        #emitter1 {
+            background-color: #222;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+          
+        #emitter2 {
+            background-color: #222;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+          
+        #emitter3 {
+            background-color: #222;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+          
+          
+        #gamenames {
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+            margin-top:50px;
+            align-items:center;
+            gap:200px;
+        }
+          
+        #game1 {
+            color: white;
+            text-align:center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+          
+        #game2 {
+            color: white;
+            text-align:center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+          
+        #game3 {
+            color: white;
+            text-align:center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+          
+          
+        .dot {
+            background-color: #4c9a0f;
+            border-radius: 50%;
+            position: absolute;
+        }
+          
+        #instructions {
+            position: fixed;
+            top: 10px;
+            text-align: center;
+            color: #999;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div id="explodes">
+        <a href = "/game1" > <div id="emitter1"></div> </a>
+        <a href = "/game2" > <div id="emitter2"></div> </a>
+        <a href = "/game3" > <div id="emitter3"></div> </a>
+      </div>
+      
+      <div id="gamenames">
+        <div id="game1">Game 1</div>
+        <div id="game2">Game 2</div>
+        <div id="game3">Game 3</div>
+      </div>
     </div>
+
+    <div id="instructions">Pick Your Game!</div>
+
+
+    <script>
+        var emitter1 = document.getElementById("emitter1")
+
+        var emitter2 = document.getElementById("emitter2")
+        
+        var emitter3 = document.getElementById("emitter3")
+        
+        Draggable.create("#emitter1", {throwProps:true, bounds:window, edgeResistance:0.7});
+
+        Draggable.create("#emitter2", {throwProps:true, bounds:window, edgeResistance:0.7});
+
+        Draggable.create("#emitter3", {throwProps:true, bounds:window, edgeResistance:0.7});
+    </script>
+
 </body>
+
+
 </html> 
-﻿
