@@ -23,7 +23,14 @@ urlpatterns = [
     path('', views.serve_file, {"file": "index.html"}),
     path('mini', views.serve_file, {"file": "minigames.html"}),
     path('start', views.serve_file, {"file": "start.html"}),
-    path('game1', views.serve_file, {"file": "game1.html"}),
+    
+    path('game1', views.serve_file, {"file": "galaga/index.html"}),
+    path('js/spaceinvaders.js', views.serve_file, {"file": "galaga/js/spaceinvaders.js"}),
+    path('js/starfield.js', views.serve_file, {"file": "galaga/js/starfield.js"}),
+    path('css/core.css', views.serve_file, {"file": "galaga/css/core.css"}),
+    path('css/typeography.css', views.serve_file, {"file": "galaga/css/typeography.css"}),
+
+
     path('game2', views.serve_file, {"file": "game2.html"}),
     path('game3', views.serve_file, {"file": "game3.html"}),
     path('login', views.serve_file, {"file": "registration/login.html"}),
