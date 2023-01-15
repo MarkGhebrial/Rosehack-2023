@@ -20,17 +20,15 @@ from duckgame import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('mini', views.mini),
-    path('start', views.start),
-    path('game1', views.game1),
-    path('game2', views.game2),
-    path('game3', views.game3),
+    path('', views.serve_file, {"file": "index.html"}),
+    path('mini', views.serve_file, {"file": "minigames.html"}),
+    path('start', views.serve_file, {"file": "start.html"}),
+    path('game1', views.serve_file, {"file": "game1.html"}),
+    path('game2', views.serve_file, {"file": "game2.html"}),
+    path('game3', views.serve_file, {"file": "game3.html"}),
     path('login', views.login),
 
     # API patterns
     path('api/update_leaderboard', views.update_leaderboard),
-    path('api/snake_leaderboard', views.snake_leaderboard),
-    path('api/clicker_leaderboard', views.clicker_leaderboard),
-    path('api/galaga_leaderboard', views.galaga_leaderboard),
+    path('api/leaderboard/<str:game>', views.get_leaderboard),
 ]
