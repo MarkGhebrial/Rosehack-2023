@@ -26,6 +26,7 @@ urlpatterns = [
     path('game1', views.serve_file, {"file": "game1.html"}),
     path('game2', views.serve_file, {"file": "game2.html"}),
     path('game3', views.serve_file, {"file": "game3.html"}),
+    path('login', views.auth),
 
     # API patterns
     path('api/leaderboard/<str:game>', views.leaderboard),

@@ -1,10 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseBadRequest
+from django.contrib.auth import authenticate, login
 from duckgame.models import SnakeLeaderboard, ClickerLeaderboard, GalagaLeaderboard
 import json
 
 def serve_file(request, file):
     return render(request, file)
+
+def auth(request):
+    if request.method == "GET":
+        return serve_file(request, "registration/login.html")
+    elif request.method == "POST":
+        data = request.POST
+        user = authenticate(request, username=data["name"], password=data["password"])
+        if user is not None:
+            login(request, user)
+            return HttpResponse("Logged in!")
+        else:
+            return HttpResponse("Invalid login")
+    else:
+        return HttpResponseBadRequest()
 
 def leaderboard(request, game):
     '''
