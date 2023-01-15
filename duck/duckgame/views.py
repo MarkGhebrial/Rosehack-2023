@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseForbidden
-from duckgame.models import UserScore
+from duckgame.models import SnakeLeaderboard, ClickerLeaderboard, GalagaLeaderboard
 import json
 
 # Create your views here.
@@ -27,16 +27,31 @@ def update_leaderboard(request):
 
     return HttpResponse('Testing, testing, 1, 2, 3')
 
-def leaderboard_json(request):
-    # s = UserScore()
-    # s.snakeScore = 99
+def snake_leaderboard(request):
+    # s = SnakeLeaderboard()
+    # s.user = 'Mark'
+    # s.score = 10
     # s.save()
 
     out = []
-    for score in UserScore.objects.all().values():
-        out.append(score["snakeScore"])        
+    for score in SnakeLeaderboard.objects.all().values():
+        out.append(score)
 
-    return HttpResponse(json.dumps({"snake_scores": out}))
+    return HttpResponse(json.dumps(out))
+
+def clicker_leaderboard(request):
+    out = []
+    for score in ClickerLeaderboard.objects.all().values():
+        out.append(score)
+
+    return HttpResponse(json.dumps(out))
+
+def galaga_leaderboard(request):
+    out = []
+    for score in GalagaLeaderboard.objects.all().values():
+        out.append(score)
+
+    return HttpResponse(json.dumps(out))
 
 def mini(request):
     return render(request, "minigames.html")

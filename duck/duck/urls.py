@@ -29,7 +29,8 @@ urlpatterns = [
     path('login', views.login),
 
     # API patterns
-    path('api/login', views.auth),
     path('api/update_leaderboard', views.update_leaderboard),
-    path('api/leaderboard', views.leaderboard_json),
+    path('api/snake_leaderboard', views.snake_leaderboard),
+    path('api/clicker_leaderboard', views.clicker_leaderboard),
+    path('api/galaga_leaderboard', views.galaga_leaderboard),
 ]
