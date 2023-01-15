@@ -55,13 +55,11 @@
   <h2>Log In</h2>
   <br>
   <form method="post">
-    {% csrf_token %}
-    <label for="name">First name:</label>
+    <label for="name">Username:</label>
     <input type="text" id="name" name="name"><br><br>
-    <label for="pass">Last name:</label>
-    <input type="text" id="pass" name="pass"><br><br>
-    {{ form.as_p }}
-    <button class="loginbutton" type="submit">Log In</button>
+    <label for="pass">Password:</label>
+    <input type="text" id="password" name="password"><br><br>
+    <input class="loginbutton" type="submit" value="Login">
   </form>
 
 </body>
