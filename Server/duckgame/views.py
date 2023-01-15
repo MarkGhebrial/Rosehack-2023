@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404, HttpResponseBadRequest
+from django.http import HttpResponse, Http404, HttpResponseBadRequest, HttpResponseForbidden
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from duckgame.models import SnakeLeaderboard, ClickerLeaderboard, GalagaLeaderboard
@@ -67,12 +67,15 @@ def leaderboard(request, game):
     elif request.method == "POST":
         data = request.POST
 
-        if data['user'] and data['score']:
-            raise HttpResponseBadRequest()
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+
+        if not 'score' in data.keys():
+            return HttpResponseBadRequest()
 
         # Write to the database
         d = table()
-        d.user = data['user']
+        d.user = request.user.username
         d.score = data['score']
         d.save()
 
