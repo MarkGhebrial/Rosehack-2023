@@ -28,6 +28,5 @@ urlpatterns = [
     path('game3', views.serve_file, {"file": "game3.html"}),
 
     # API patterns
-    path('api/update_leaderboard', views.update_leaderboard),
-    path('api/leaderboard/<str:game>', views.get_leaderboard),
+    path('api/leaderboard/<str:game>', views.leaderboard),
 ]
