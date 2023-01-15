@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseBadRequest
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from duckgame.models import SnakeLeaderboard, ClickerLeaderboard, GalagaLeaderboard
 import json
@@ -14,7 +14,7 @@ def auth(request):
         user = authenticate(request, username=data["name"], password=data["password"])
         if user is not None:
             login(request, user)
-            return HttpResponse("Logged in!")
+            return redirect("/")
         else:
             return HttpResponse("Invalid login. Are the username and password correct?")
     else:
@@ -29,6 +29,10 @@ def new_user(request):
         return auth(request)
     else:
         return HttpResponseBadRequest()
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
 
 def leaderboard(request, game):
     '''

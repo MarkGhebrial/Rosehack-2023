@@ -31,5 +31,6 @@ urlpatterns = [
     # API patterns
     path('api/login', views.auth),
     path('api/login/new', views.new_user),
+    path('api/logout', views.logout_view),
     path('api/leaderboard/<str:game>', views.leaderboard),
 ]
