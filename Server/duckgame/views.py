@@ -73,13 +73,24 @@ def leaderboard(request, game):
         if not 'score' in data.keys():
             return HttpResponseBadRequest()
 
+        # Make sure the score field is an integer
+        try:
+            int(data['score'])
+        except:
+            return HttpResponseBadRequest()
+
+        for entry in table.objects.all():
+            if entry.user == request.user.username: # Find the user's leaderboard entry
+                if int(data['score']) <= entry.score:
+                    return HttpResponse("No personal best")
+
         # Write to the database
         d = table()
         d.user = request.user.username
         d.score = data['score']
         d.save()
 
-        return HttpResponse()
+        return HttpResponse("New personal best!")
 
     else:
         raise HttpResponseBadRequest()
