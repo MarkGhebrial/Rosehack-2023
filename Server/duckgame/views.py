@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseBadRequest
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from duckgame.models import SnakeLeaderboard, ClickerLeaderboard, GalagaLeaderboard
 import json
 
@@ -8,16 +9,24 @@ def serve_file(request, file):
     return render(request, file)
 
 def auth(request):
-    if request.method == "GET":
-        return serve_file(request, "registration/login.html")
-    elif request.method == "POST":
+    if request.method == "POST":
         data = request.POST
         user = authenticate(request, username=data["name"], password=data["password"])
         if user is not None:
             login(request, user)
             return HttpResponse("Logged in!")
         else:
-            return HttpResponse("Invalid login")
+            return HttpResponse("Invalid login. Are the username and password correct?")
+    else:
+        return HttpResponseBadRequest()
+
+def new_user(request):
+    if request.method == "POST":
+        data = request.POST
+        user = User.objects.create_user(username=data["name"], password=data['password'])
+        user.save()
+
+        return auth(request)
     else:
         return HttpResponseBadRequest()
 
