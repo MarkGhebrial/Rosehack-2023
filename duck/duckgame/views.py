@@ -1,17 +1,17 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseBadRequest
 from duckgame.models import SnakeLeaderboard, ClickerLeaderboard, GalagaLeaderboard
 import json
 
-def update_leaderboard(request):
-    # if not request.user.is_authenticated:
-    #     return HttpResponseForbidden('Not authorized')
+def serve_file(request, file):
+    return render(request, file)
 
-    # request.user
-    return HttpResponse('Testing, testing, 1, 2, 3')
+def leaderboard(request, game):
+    '''
+    If a GET request: Return a JSON list of leaderboard entries for the specified game,
+    sorted from highest to lowest score.
 
-def get_leaderboard(request, game):
-    '''Return a JSON list
+    If a POST request: Add the supplied leaderboard entry to the leaderboard.
     '''
 
     table = None
@@ -24,13 +24,31 @@ def get_leaderboard(request, game):
     else:
         raise Http404()
 
-    out = []
-    for score in table.objects.all().values():
-        out.append(score)
+    # Get the leaderboard data
+    if request.method == "GET":
+        out = []
+        for score in table.objects.all().values():
+            out.append(score)
 
-    out = sorted(out, key=lambda d: d["score"], reverse=True)
+        out = sorted(out, key=lambda d: d["score"], reverse=True)
 
-    return HttpResponse(json.dumps(out))
+        return HttpResponse(json.dumps(out))
 
-def serve_file(request, file):
-    return render(request, file)
+    # Upload data to the leaderboard, an example request looks like the following:
+    # requests.post("http://localhost:8000/api/leaderboard/galaga", data={'user':'Mark','score':10})
+    elif request.method == "POST":
+        data = request.POST
+
+        if data['user'] and data['score']:
+            raise HttpResponseBadRequest()
+
+        # Write to the database
+        d = table()
+        d.user = data['user']
+        d.score = data['score']
+        d.save()
+
+        return HttpResponse()
+
+    else:
+        raise HttpResponseBadRequest()
