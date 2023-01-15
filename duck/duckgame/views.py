@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseForbidden
+from duckgame.models import UserScore
+import json
 
 # Create your views here.
 def index(request):
@@ -24,6 +26,18 @@ def update_leaderboard(request):
     # request.user
 
     return HttpResponse('Testing, testing, 1, 2, 3')
+
+def leaderboard_json(request):
+    # s = UserScore()
+    # s.snakeScore = 99
+    # s.save()
+
+    out = []
+    for score in UserScore.objects.all().values():
+        out.append(score["snakeScore"])        
+
+    return HttpResponse(json.dumps({"snake_scores": out}))
+
 def mini(request):
     return render(request, "minigames.html")
 

@@ -21,11 +21,14 @@ from duckgame import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('update_leaderboard', views.update_leaderboard),
-    path('login', views.auth),
     path('mini', views.mini),
     path('start', views.start),
     path('game1', views.game1),
     path('game2', views.game2),
     path('game3', views.game3),
+
+    # API patterns
+    path('api/login', views.auth),
+    path('api/update_leaderboard', views.update_leaderboard),
+    path('api/leaderboard', views.leaderboard_json),
 ]
