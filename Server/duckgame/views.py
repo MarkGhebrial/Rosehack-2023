@@ -71,13 +71,13 @@ def leaderboard(request, game):
             return HttpResponseForbidden()
 
         if not 'score' in data.keys():
-            return HttpResponseBadRequest()
+            return HttpResponseBadRequest("Provide a score field")
 
         # Make sure the score field is an integer
         try:
             int(data['score'])
         except:
-            return HttpResponseBadRequest()
+            return HttpResponseBadRequest("Score must be an integer")
 
         for entry in table.objects.all():
             if entry.user == request.user.username: # Find the user's leaderboard entry
